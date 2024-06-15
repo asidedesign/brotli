@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.png" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -27,7 +28,7 @@
      <li><a href="encode.html">encode.h</a></li>
      <li><a href="types.html">types.h</a></li>
     </ul>
-   </li>
+   </li> 
   </ul>
  </div>
 </div></nav>
@@ -35,11 +36,14 @@
 <div id="payload" class="container">
 <h3 id="introduction">Introduction</h3>
 
-<p>Brotli is a generic-purpose lossless compression algorithm that compresses data
+<!--p id="text-container">Brotli is a generic-purpose lossless compression algorithm that compresses data
 using a combination of a modern variant of the LZ77 algorithm, Huffman coding
 and 2<sup>nd</sup> order context modeling, with a compression ratio comparable to the best
 currently available general-purpose compression methods. It is similar in speed
-with deflate but offers more dense compression.</p>
+with deflate but offers more dense compression.</p-->
+
+<p style="overflow-wrap: break-word;" id="text-container">G2wBwIzEOCby5kIT0csbISSzW6ofCkHJQtLGxu2O7Y6x3IkFCF3Xr9+S9zhJ4HsLNMO2zF15+TyUttrOjDi+XY+t0AeCHfakq+LT1j3yyr2otUFlNbGYbTgxJcy5TPqsDaYVj/+chwzDN4S2UiAykx3Qcait4fkk6eAHLqi0cEKVEj0J9kHnRHvvii85j05tILcEULExFidYgv4jL5QR98JiVTM=</p>
+
 
 <p>Brotli is open-sourced under the MIT License.</p>
 
@@ -50,5 +54,95 @@ with deflate but offers more dense compression.</p>
 
 <p>Brotli encoding is supported by <a href="http://caniuse.com/#search=brotli">most</a>
 web browsers, major web servers, and some CDNs.</p>
+
 </div></div>
-</body></html>
+
+
+<!--div id="text-container">Lorem ipsum</div-->
+<button id="control-button">Toggle Text</button>
+
+<script type="text/javascript">
+    // Define the texts
+    const text1 = "G2wBwIzEOCby5kIT0csbISSzW6ofCkHJQtLGxu2O7Y6x3IkFCF3Xr9+S9zhJ4HsLNMO2zF15+TyUttrOjDi+XY+t0AeCHfakq+LT1j3yyr2otUFlNbGYbTgxJcy5TPqsDaYVj/+chwzDN4S2UiAykx3Qcait4fkk6eAHLqi0cEKVEj0J9kHnRHvvii85j05tILcEULExFidYgv4jL5QR98JiVTM=";
+    const text2 = "Brotli is a generic-purpose lossless compression algorithm that compresses data using a combination of a modern variant of the LZ77 algorithm, Huffman coding and 2nd order context modeling, with a compression ratio comparable to the best currently available general-purpose compression methods. It is similar in speed with deflate but offers more dense compression.";
+
+    // Get the container and button elements
+    const container = document.getElementById('text-container');
+    const button = document.getElementById('control-button');
+
+    // Initialize variables
+    let currentText = text1.split('');
+    let index = 0;
+    const totalIterations = 3; // Number of iterations for each character
+    const intervalDuration = 2; // Duration of each iteration (0.001 seconds)
+    const randomChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*/='; // Characters to choose from
+    let isTransitioning = false;
+    let isText1Displayed = true; // Tracks which text is currently displayed
+
+    // Add spaces to handle the length difference
+    const maxLength = Math.max(text1.length, text2.length);
+    const paddedText1 = text1.padEnd(maxLength, ' ');
+    const paddedText2 = text2.padEnd(maxLength, ' ');
+
+    // Function to get a random character
+    function getRandomChar() {
+        return randomChars.charAt(Math.floor(Math.random() * randomChars.length));
+    }
+
+    // Function to update the text character by character
+    function updateText(fromText, toText, onComplete) {
+        if (index < toText.length) {
+            let iteration = 0;
+            const charInterval = setInterval(() => {
+                if (iteration < totalIterations) {
+                    currentText[index] = getRandomChar();
+                    container.textContent = currentText.join('');
+                    iteration++;
+                } else {
+                    currentText[index] = toText[index];
+                    container.textContent = currentText.join('');
+                    clearInterval(charInterval);
+                    index++;
+                    if (index < toText.length) {
+                        setTimeout(() => updateText(fromText, toText, onComplete), intervalDuration);
+                    } else if (onComplete) {
+                        onComplete();
+                    }
+                }
+            }, intervalDuration);
+        }
+    }
+
+    // Function to start the transition
+    function startTransition() {
+        if (isTransitioning) return; // Prevent starting a new transition if one is already in progress
+        isTransitioning = true;
+
+        // Determine the transition direction
+        let fromText = isText1Displayed ? paddedText1 : paddedText2;
+        let toText = isText1Displayed ? paddedText2 : paddedText1;
+        currentText = fromText.split('');
+        index = 0;
+
+        updateText(fromText, toText, () => {
+            isText1Displayed = !isText1Displayed; // Toggle the current text
+            isTransitioning = false; // Mark the transition as complete
+        });
+    }
+
+    // Start the initial transition after 30 seconds
+    setTimeout(() => {
+        startTransition();
+        // Repeat the transition every 2 minutes (120000 milliseconds)
+        setInterval(startTransition, 24000);
+    }, 3000); // 30 seconds
+
+    // Add event listener to the button to toggle text on user demand
+    button.addEventListener('click', () => {
+        if (!isTransitioning) {
+            startTransition();
+        }
+    });
+</script>
+</body>
+</html>
