@@ -1,0 +1,291 @@
+/* CORE */
+
+html, body, * {
+  box-sizing: border-box;
+  clear: none;
+  padding: 0;
+  margin: 0;
+}
+
+p, dl, h2 {
+  margin: .5em .25em;
+}
+
+p:first-child {margin-top: 0}
+p:last-child {margin-bottom: 0}
+ol {padding-left: 2em}
+
+html, body, table, p {
+  font-style: normal;
+  font-size: 16px;
+  border-spacing: 0;
+}
+
+#payload p {
+  text-indent: 1.5em;
+}
+
+#doxygen > * {min-width: 752px}
+/* +24px to media size for y-scrollbar */
+@media (max-width: 776px) {
+  #doxygen > *, #doxygen table, #doxygen p {font-size: 15px}
+  #doxygen > * {min-width: 704px}
+}
+@media (max-width: 728px) {
+  #doxygen > *, #doxygen table, #doxygen p {font-size: 14px}
+  #doxygen > * {min-width: 656px}
+}
+@media (max-width: 680px) {
+  #doxygen > *, #doxygen table, #doxygen p {font-size: 13px}
+  #doxygen > * {min-width: 608px}
+}
+@media (max-width: 632px) {
+  #doxygen > *, #doxygen table, #doxygen p {font-size: 12px}
+  #doxygen > * {min-width: 576px}
+}
+@media (max-width: 576px) {
+  #doxygen > *, #doxygen table, #doxygen p {font-size: 12px}
+  #doxygen > * {min-width: 576px}
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  color: #444;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  flex: 0 0 51px;
+  border-bottom: solid 1px #ddd;
+  background-color: #f8f8f8;
+}
+
+#logo {
+  padding: 4px;
+  width: 50px;
+  height: 50px;
+}
+
+#payload, #doxygen {
+  flex: 1 1 auto;
+  overflow: auto;
+  margin-top: 51px;
+}
+
+a {
+  color: #337ab7;
+  text-decoration: none;
+}
+
+a:hover, a:focus {
+  color: #23527c;
+  text-decoration: underline;
+  outline: none;
+}
+
+/* DOXYGEN */
+
+.title, dt, .memname, .memproto, .params .paramname {
+  font-weight: bold;
+}
+
+.title {
+  font-size: 1.5em;
+  margin: .333em;
+}
+
+.fieldtable td, .fieldtable th, div.header {
+  border-bottom: 1px solid #ccc;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+div.fragment {
+  margin: .5em .25em;
+  padding: .25em;
+  background-color: #fcfcfc;
+  border: 1px solid #ccc;
+  overflow-x: auto;
+}
+
+div.line {
+  font-family: "courier new", courier, monospace;
+  line-height: 1.2em;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  text-indent: -2em;
+  padding-left: 2em;
+}
+
+div.line:after {
+  content:"\000A";
+  white-space: pre;
+}
+
+span.keywordtype {color: #064}
+span.keywordflow {color: #c40}
+span.comment {color: #800}
+span.preprocessor {color: #862}
+span.stringliteral {color: #028}
+td.paramname {color: #606}
+
+table.memberdecls {
+  margin-top: 1em;
+  margin-bottom: 1.5em;
+  width: 100%;
+}
+
+.memSeparator {
+  border-bottom: 1px solid #ddd;
+  line-height: 1px;
+  padding: 0;
+}
+
+.memItemLeft {white-space: nowrap}
+.memItemRight {width: 100%}
+
+.memitem {
+  margin-bottom: 1px;
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+}
+
+td.memname, tr > td.paramname, .memname td:last-child {
+  text-indent: -1em;
+  padding-left: 1em;
+  white-space: nowrap;
+}
+
+.memproto {
+  text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.9);
+  background-color: #eee;
+}
+
+.memdoc {
+  padding: .25em;
+  background-color: #FFF;
+}
+
+.paramkey {text-align: right}
+
+td.paramtype, td.paramname {
+  white-space: nowrap;
+  padding: 0;
+}
+
+.paramname em {font-style: normal}
+
+.params .paramdir {
+  word-break: normal;
+  padding: 0;
+}
+
+.fieldtable td.fieldtype, .fieldtable td.fieldname {
+  white-space: nowrap;
+  border-right: 1px solid #ccc;
+  vertical-align: top;
+}
+
+.fieldtable td.fielddoc p:first-child {margin-top: 0}
+.fieldtable tr:last-child td {border-bottom: none}
+
+.fieldtable th {
+  background-color: #eee;
+  text-align: left;
+}
+
+div.summary {
+  float: right;
+  font-size: 0.75em;
+  text-align: right;
+}
+
+div.summary a {white-space: nowrap}
+div.header {border-top: 1px solid #fff}
+
+dl.section, .params {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+dl.note {
+  border-color: #ccf;
+  background-color: #f8f8ff;
+}
+
+dl.warning, dl.attention {
+  border-color: #fc8;
+  background-color: #fff8f0;
+}
+
+tr.heading > td {
+  background-color: #f0f0f0;
+  border-top: solid 1px #ccc;
+  border-bottom: solid 1px #ccc;
+}
+
+tr.heading h2 {border: 0}
+
+.contents > p {
+  display: block;
+  margin: .75em;
+}
+
+td, th {padding: 0.25em}
+dd {margin-left: .5em}
+
+.textblock, .memproto, .fieldtable td, .fieldtable th, dl.note, dl.warning, dl.attention {
+  padding: .25em .5em;
+}
+
+table.fieldtable td.fieldname {
+  white-space: normal;
+  min-width: 10em;
+}
+
+table.fieldtable, dl.note, dl.warning, dl.attention {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* CUSTOM */
+
+#doxygen.container, #header .container, #header .container > .navbar-header {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
+.navbar-toggle {
+  margin-right: 7px;
+}
+
+.navbar-nav {
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  #header .container > .navbar-header {
+    width: 50px;
+  }
+}
+
+code {
+  padding: 0;
+  font-size: 1em;
+  color: #000;
+  background-color: transparent;
+}
